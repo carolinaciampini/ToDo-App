@@ -2,7 +2,9 @@
 import bcrypt from 'bcryptjs';
 import User from '../models/user.model.js'
 import jwt from 'jsonwebtoken'
-import {createAccessToken} from '../libs/jwt.js'
+import { createAccessToken } from '../libs/jwt.js'
+import { TOKEN_SECRET } from '../config.js';
+
 
 export const register = async(req, res) => {
   const { username, email, password } = req.body
@@ -59,6 +61,7 @@ export const login = async(req, res) => {
     })
 
     res.cookie('token', token) // crea la cookie para la respuesta
+    
     res.json({
       id: userFound._id,
       username: userFound.username,
@@ -93,4 +96,24 @@ export const profile = async(req, res) => {
       updateAt: userFound.updatedAt
     } )
   
+}
+
+
+export const verifyToken = async (req, res) => {
+  const { token } = req.cookies;
+  if (!token) return res.status(401).json({ message: "No esta autorizado" });
+
+  jwt.verify(token, TOKEN_SECRET, async (err, user) => {
+    
+    if (err) return res.status(401).json({ message: "No esta autorizado" })
+    
+    const userFound = await User.findById(user.id)
+    if (!userFound) return res.status(401).json({ message: "No esta autorizado" })
+    
+    return res.json({
+      id: userFound.id,
+      username: userFound.username,
+      email: userFound.email
+    })
+  })
 }
