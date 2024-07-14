@@ -8,26 +8,31 @@ import HomePage from "./pages/HomePage"
 import ProfilePage from "./pages/ProfilePage"
 import ProtectedRoute from "./ProtectedRoute"
 import { TaskProvider } from "./context/TasksContext"
+import Navbar from "./components/Navbar"
 
 function App() {
   return (
     <AuthProvider>
       <TaskProvider>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<HomePage />}></Route>
-          <Route path="/login" element={<LoginPage />}></Route>
-          <Route path="/register" element={<RegisterPage />}></Route>
+        <BrowserRouter>
+          <main className="container mx-auto px-10">
+            
+            <Navbar></Navbar>
 
-          <Route element={<ProtectedRoute />}> 
-            <Route path="/tasks" element={<TasksPage />}></Route>
-            <Route path="/add-task" element={<TaskFormPage />}></Route>
-            <Route path="/tasks/:id" element={<TaskFormPage />}></Route>
-            <Route path="/profile" element={<ProfilePage />}></Route>
-          </Route>
+            <Routes>
+              <Route path="/" element={<HomePage />}></Route>
+              <Route path="/login" element={<LoginPage />}></Route>
+              <Route path="/register" element={<RegisterPage />}></Route>
+
+              <Route element={<ProtectedRoute />}>
+                <Route path="/tasks" element={<TasksPage />}></Route>
+                <Route path="/add-task" element={<TaskFormPage />}></Route>
+                <Route path="/tasks/:id" element={<TaskFormPage />}></Route>
+                <Route path="/profile" element={<ProfilePage />}></Route>
+              </Route>
+            </Routes>
+         </main>
           
-
-        </Routes>
         </BrowserRouter>
       </TaskProvider>
     </AuthProvider>
