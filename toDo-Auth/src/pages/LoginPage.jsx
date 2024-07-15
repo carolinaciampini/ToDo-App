@@ -31,7 +31,7 @@ function LoginPage() {
           {errors.email && (<p className="text-red-500">An email is required</p>)}
           <input type="password" {...register("password", { required: true })} className="w-full bg-zinc-700 text-white px-4 py-2 rounded-md my-2" placeholder="Password" />
           {errors.password && (<p className="text-red-500">A password is required</p>)}
-          <button type="submit">Login</button>
+          <button type="submit" className="bg-sky-500 text-white px-4 py-2 rounded-md my-2">Login</button>
         </form>
         <p className="flex gap-x-2 justify-between">
           Don't have an account yet? <Link to="/register" className="text-sky-500">Sign Up</Link>
