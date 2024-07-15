@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, useEffect } from "react";
-import { createTaskRequest, getTasksRequest, deleteTaskRequest } from "../api/task.js";
+import { createTaskRequest, getTasksRequest, deleteTaskRequest, getTaskRequest, updateTaskRequest } from "../api/task.js";
 
 const TaskContext = createContext();
 
@@ -17,7 +17,7 @@ export function TaskProvider({ children }) {
   const getTasks = async () => {
     try {
       const res = await getTasksRequest()
-      console.log("Response from getTasksRequest:", res.data); // Depuración
+      // console.log("Response from getTasksRequest:", res.data); // Depuración
       setTasks(res.data)
 
     } catch (err) {
@@ -35,12 +35,31 @@ export function TaskProvider({ children }) {
 
     try {
       const res = await deleteTaskRequest(id);
-        if(res.status === 204) setTasks(tasks.filter(task => task._id /= id))
+        if(res.status === 204) setTasks(tasks.filter(task => task._id !== id))
     } catch(err) {
       console.log(err)
     }
    
     
+  }
+
+  const getTask = async (id) => {
+    try {
+      const res = await getTaskRequest(id);
+      return res.data
+    } catch (err) {
+      console.error("Error in getTask:", err);
+    }
+  }
+
+  const updateTask = async (id, task) => {
+    try {
+      const res = await updateTaskRequest(id, task)
+      console.log(res)
+    } catch (err) {
+      console.log(err)
+    }
+   
   }
 
   return (
@@ -49,6 +68,8 @@ export function TaskProvider({ children }) {
       createTask,
       deleteTask,
       getTasks,
+      getTask,
+      updateTask
     }}>
       {children}
     </TaskContext.Provider>
