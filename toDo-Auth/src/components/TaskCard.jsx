@@ -10,8 +10,8 @@ function TaskCard({ task }) {
         <div className="flex gap-x-2 items-center">
           <button onClick={() => {
             deleteTask(task._id)
-          }} className="bg-red-700 hover:bg-red-400 text-white px-4 py-2 rounded-md"> DELETE </button>
-          <Link to={`/tasks/${task._id}`} className="bg-blue-600 hover:bg-blue-400 text-white px-4 py-2 rounded-md" >EDIT</Link>
+          }} className="bg-red-500 hover:bg-red-400 text-white px-4 py-2 rounded-md"> DONE </button>
+          <Link to={`/tasks/${task._id}`} className="bg-blue-500 hover:bg-blue-400 text-white px-4 py-2 rounded-md" >EDIT</Link>
         </div>
      </header>
       <p className="text-slate-300">{task.description}</p>
