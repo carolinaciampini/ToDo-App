@@ -9,10 +9,20 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const app = express();
+
+const allowedOrigins = process.env.API_URL.split(',');
+
 app.use(cors({
-  origin: process.env.API_URL,
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   credentials: true
 }));
+
 app.use(morgan("dev"));
 app.use(express.json());
 app.use(cookieParser());
