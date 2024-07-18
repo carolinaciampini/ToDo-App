@@ -6,26 +6,12 @@ import cookieParser from "cookie-parser";
 import cors from 'cors'
 import dotenv from 'dotenv';
 
-//dotenv.config();
+dotenv.config();
 
 const app = express();
 
-const allowedOrigins = [
-  'https://to-do-client-eight.vercel.app',
-  'https://to-do-client-git-main-carolinas-projects-916ee369.vercel.app',
-  'https://to-do-client-r0x9756vs-carolinas-projects-916ee369.vercel.app'
-];
-
 app.use(cors({
-  origin: function (origin, callback) {
-    console.log('Origin:', origin);
-    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
-      callback(null, true);
-    } else {
-       console.log('Blocked by CORS:', origin);
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
+  origin: process.env.API_URL,
   credentials: true
 }));
 
