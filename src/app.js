@@ -11,9 +11,9 @@ dotenv.config();
 const app = express();
 
 const allowedOrigins = [
-  'https://to-do-server-peach.vercel.app',
-  'https://to-do-server-carolinas-projects-916ee369.vercel.app',
-  'https://to-do-server-git-main-carolinas-projects-916ee369.vercel.app'
+  'https://to-do-client-eight.vercel.app',
+  'https://to-do-client-carolinas-projects-916ee369.vercel.app',
+  'https://to-do-client-git-main-carolinas-projects-916ee369.vercel.app'
 ];
 
 app.use(cors({
@@ -27,6 +27,7 @@ app.use(cors({
   credentials: true
 }));
 
+app.options('*', cors()); // Esto permite que el middleware CORS maneje las solicitudes OPTIONS
 
 app.use(morgan("dev"));
 app.use(express.json());
