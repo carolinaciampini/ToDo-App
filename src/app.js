@@ -13,11 +13,13 @@ const app = express();
 const allowedOrigins = [
   'https://to-do-client-eight.vercel.app',
   'https://to-do-client-carolinas-projects-916ee369.vercel.app',
-  'https://to-do-client-git-main-carolinas-projects-916ee369.vercel.app'
+  'https://to-do-client-git-main-carolinas-projects-916ee369.vercel.app',
+  'http://localhost:5173'
 ];
 
 app.use(cors({
   origin: function (origin, callback) {
+    console.log('Solicitando desde el origen:', origin); 
     if (allowedOrigins.includes(origin)) {
       callback(null, true);
     } else {
