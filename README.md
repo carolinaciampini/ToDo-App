@@ -1,6 +1,6 @@
-# ToDo-Auth
+# ToDo-App
 
-Esta es una aplicación de lista de tareas (To-Do) que permite a los usuarios autenticados gestionar sus tareas mediante operaciones CRUD (Crear, Leer, Actualizar, Eliminar).
+Esta es una aplicación de lista de tareas (To-Do) que permite a los usuarios autenticados gestionar sus tareas mediante operaciones CRUD.
 
 Características
 Autenticación: Los usuarios pueden registrarse e iniciar sesión para gestionar sus tareas.
